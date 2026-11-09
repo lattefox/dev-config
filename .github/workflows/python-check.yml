@@ -1,0 +1,41 @@
+# 可复用的 Python（uv）仓库检查流程。调用方：
+#
+#   jobs:
+#     check:
+#       uses: lattefox/dev-config/.github/workflows/python-check.yml@v1
+name: Python check
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        type: string
+        default: '3.12'
+      test:
+        type: boolean
+        default: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python-version }}
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - run: uv sync --locked --all-groups
+
+      - name: Format, lint, type-check
+        run: make check
+
+      - name: Test
+        if: inputs.test
+        run: make test

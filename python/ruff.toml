@@ -1,0 +1,19 @@
+# 复制到仓库根目录使用（ruff 的 extend 只支持本地路径）。来源：nexus-api
+line-length = 120
+
+[lint]
+select = ["E", "F", "B", "I", "UP"]
+
+[lint.flake8-bugbear]
+extend-immutable-calls = [
+  "fastapi.Depends",
+  "fastapi.params.Depends",
+  "fastapi.Query",
+  "fastapi.params.Query",
+  "sqlmodel.Depends",
+  "sqlmodel.Field",
+]
+
+[format]
+quote-style = "double"
+indent-style = "space"

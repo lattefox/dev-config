@@ -1,0 +1,68 @@
+# 可复用的 Node 仓库检查流程。调用方：
+#
+#   jobs:
+#     check:
+#       uses: lattefox/dev-config/.github/workflows/node-check.yml@v1
+#       with:
+#         prisma: true
+#         env: |
+#           DATABASE_URL=postgresql://ci:ci@localhost:5432/ci
+name: Node check
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        type: string
+        default: '24'
+      prisma:
+        description: 安装后执行 prisma generate
+        type: boolean
+        default: false
+      test:
+        description: 执行 pnpm test（Tier 1 仓库开启）
+        type: boolean
+        default: false
+      build:
+        type: boolean
+        default: true
+      env:
+        description: 多行 KEY=VALUE，写入 GITHUB_ENV，仅用于 CI 占位值，不要放真实密钥
+        type: string
+        default: ''
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Export CI env
+        if: inputs.env != ''
+        run: printf '%s\n' "${{ inputs.env }}" >> "$GITHUB_ENV"
+
+      # 版本取自调用方 package.json 的 packageManager 字段
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Prisma generate
+        if: inputs.prisma
+        run: pnpm prisma generate
+
+      - name: Format, lint, type-check
+        run: pnpm check
+
+      - name: Test
+        if: inputs.test
+        run: pnpm test
+
+      - name: Build
+        if: inputs.build
+        run: pnpm build
