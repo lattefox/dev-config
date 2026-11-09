@@ -10,7 +10,8 @@ const testFiles = ['**/*.spec.ts', '**/*.e2e-spec.ts', 'test/**/*.ts']
 
 export default tseslint.config(
   ignores,
-  { ignores: ['prisma/migrations/**', 'scripts/**', 'data/**', '.hypothesis/**', '**/*.js'] },
+  // prisma/ 下是 tsx 直接运行的 seed 脚本，不在 tsconfig 中
+  { ignores: ['prisma/**', 'scripts/**', 'data/**', '.hypothesis/**', '**/*.js'] },
   ...tseslint.configs.recommendedTypeChecked,
   {
     languageOptions: {
@@ -37,9 +38,20 @@ export default tseslint.config(
       'prefer-const': 'error',
       'prefer-template': 'error',
       eqeqeq: ['error', 'always', { null: 'ignore' }],
+      // recommendedTypeChecked 中原有后端配置未开启的规则：v1 先告警，清零后再升为 error
+      '@typescript-eslint/require-await': 'warn',
+      '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
+      '@typescript-eslint/restrict-template-expressions': 'warn',
+      '@typescript-eslint/no-unsafe-enum-comparison': 'warn',
+      '@typescript-eslint/no-redundant-type-constituents': 'warn',
     },
   },
   readability,
+  {
+    // 根目录的工具配置文件（jest.config.ts 等）不在 tsconfig 中，只做语法检查
+    files: ['*.config.ts', '*.config.mts'],
+    ...tseslint.configs.disableTypeChecked,
+  },
   {
     files: testFiles,
     ...tseslint.configs.disableTypeChecked,

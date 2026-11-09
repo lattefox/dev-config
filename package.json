@@ -1,6 +1,6 @@
 {
   "name": "@lattefox/dev-config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Shared ESLint / Prettier / tsconfig / commitlint baseline for lattefox and personal projects",
   "license": "MIT",
   "type": "module",
