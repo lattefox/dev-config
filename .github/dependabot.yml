@@ -1,0 +1,25 @@
+# 依赖升级：每月一次，小版本与补丁合并成一个 PR；大版本手动升级。安全更新由仓库设置即时提 PR。
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: chore(deps)
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+    ignore:
+      - dependency-name: '*'
+        update-types: [version-update:semver-major]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: chore(ci)
+    groups:
+      actions:
+        patterns: ['*']
