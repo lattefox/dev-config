@@ -2,6 +2,8 @@
 
 所有项目共用的 ESLint / Prettier / tsconfig / commitlint 基线，以及可复用的 CI 流程。改规则只改这里，各仓库升级 tag 即可。
 
+跨项目的工程准则（分级、提交与合并、测试、文档、精简）见 [GOVERNANCE.md](GOVERNANCE.md)。
+
 ## 安装
 
 ```sh
