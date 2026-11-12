@@ -30,6 +30,16 @@ import react from '@lattefox/dev-config/eslint/react'
 export default [...react, { rules: { '@typescript-eslint/no-unnecessary-condition': 'off' } }]
 ```
 
+## AI 编码约定
+
+`ai/` 下是可共享的 AI 编码约定，各仓库在自己的 `CLAUDE.md` 里引用，再写仓库特有的内容：
+
+| 文件                   | 适用                     |
+| ---------------------- | ------------------------ |
+| `ai/tanstack-start.md` | 所有 TanStack Start 前端 |
+
+引用方式：`CLAUDE.md` 中单独一行 `@node_modules/@lattefox/dev-config/ai/tanstack-start.md`（需先安装依赖）。
+
 ## 脚本契约
 
 每个仓库对外只暴露这 5 个入口，CI 只调用它们：
