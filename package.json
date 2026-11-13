@@ -1,6 +1,6 @@
 {
   "name": "@lattefox/dev-config",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Shared ESLint / Prettier / tsconfig / commitlint baseline for lattefox and personal projects",
   "license": "MIT",
   "type": "module",
@@ -14,13 +14,16 @@
     "./prettier": "./prettier/index.js",
     "./commitlint": "./commitlint/index.js",
     "./tsconfig/react.json": "./tsconfig/react.json",
-    "./tsconfig/nest.json": "./tsconfig/nest.json"
+    "./tsconfig/nest.json": "./tsconfig/nest.json",
+    "./knip/react": "./knip/react.js",
+    "./knip/nest": "./knip/nest.js"
   },
   "files": [
     "eslint",
     "prettier",
     "commitlint",
     "tsconfig",
+    "knip",
     "python",
     "templates",
     "ai"

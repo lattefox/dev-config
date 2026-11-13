@@ -18,8 +18,8 @@ export default [
   },
   readability,
   {
-    // 数据文件与 shadcn 组件不受可读性规则约束
-    files: ['src/components/ui/**', '**/data/**', '**/*.data.ts'],
+    // 纯数据文件（命名为 *.data.ts）与 shadcn 组件不受可读性规则约束；data/ 目录里带逻辑的文件照常检查
+    files: ['src/components/ui/**', '**/*.data.ts'],
     rules: {
       'max-lines': 'off',
       'max-lines-per-function': 'off',
