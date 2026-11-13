@@ -7,7 +7,7 @@
 ## 安装
 
 ```sh
-pnpm add -D github:lattefox/dev-config#v1.0.4
+pnpm add -D github:lattefox/dev-config#v1.0.5
 ```
 
 ## 使用
@@ -37,11 +37,16 @@ export default [...react, { rules: { '@typescript-eslint/no-unnecessary-conditio
 
 `ai/` 下是可共享的 AI 编码约定，各仓库在自己的 `CLAUDE.md` 里引用，再写仓库特有的内容：
 
-| 文件                   | 适用                     |
-| ---------------------- | ------------------------ |
-| `ai/tanstack-start.md` | 所有 TanStack Start 前端 |
+| 文件                      | 适用                                     |
+| ------------------------- | ---------------------------------------- |
+| `ai/code-organization.md` | 所有仓库：分层、拆分、抽象、常量、命名等 |
+| `ai/tanstack-start.md`    | 所有 TanStack Start 前端                 |
+| `ai/nestjs.md`            | lattefx-backend、auth-service            |
+| `ai/fastapi.md`           | nexus-api                                |
+| `ai/android.md`           | lattefx-android                          |
+| `ai/ios.md`               | lattefx-ios                              |
 
-引用方式：`CLAUDE.md` 中单独一行 `@node_modules/@lattefox/dev-config/ai/tanstack-start.md`（需先安装依赖）。
+引用方式：`CLAUDE.md` 中单独一行引用，通用约定和对应技术栈各一行。Node 仓库写 `@node_modules/@lattefox/dev-config/ai/<文件>`（需先安装依赖）；Python 和移动端仓库不安装 dev-config，写本地 dev-config 仓库的相对路径，例如 `@../../dev-config/ai/<文件>`。
 
 ## 脚本契约
 
