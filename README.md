@@ -7,7 +7,7 @@
 ## 安装
 
 ```sh
-pnpm add -D github:lattefox/dev-config#v1.0.3
+pnpm add -D github:lattefox/dev-config#v1.0.4
 ```
 
 ## 使用
