@@ -1,13 +1,13 @@
 # @lattefox/dev-config
 
-所有项目共用的 ESLint / Prettier / tsconfig / commitlint 基线，以及可复用的 CI 流程。改规则只改这里，各仓库升级 tag 即可。
+所有项目共用的 ESLint / Prettier / tsconfig / commitlint / knip 基线，以及可复用的 CI 流程。改规则只改这里，各仓库升级 tag 即可。
 
 跨项目的工程准则（分级、提交与合并、测试、文档、精简）见 [GOVERNANCE.md](GOVERNANCE.md)。
 
 ## 安装
 
 ```sh
-pnpm add -D github:lattefox/dev-config#v1.0.0
+pnpm add -D github:lattefox/dev-config#v1.0.3
 ```
 
 ## 使用
@@ -18,9 +18,12 @@ pnpm add -D github:lattefox/dev-config#v1.0.0
 | `prettier.config.js`       | `export { default } from '@lattefox/dev-config/prettier'`                                                  |
 | `commitlint.config.js`     | `export { default } from '@lattefox/dev-config/commitlint'`，另需 `@commitlint/cli`                        |
 | `tsconfig.json`            | `"extends": "@lattefox/dev-config/tsconfig/react.json"`，本地只写 `paths`、`include`、`exclude` 等相对路径 |
+| `knip.config.js`           | `export { default } from '@lattefox/dev-config/knip/react'`（NestJS 用 `knip/nest`），另需 `knip`          |
 | `.husky/`                  | 复制 `templates/husky/pre-commit`、`commit-msg`                                                            |
 | `.github/workflows/ci.yml` | `uses: lattefox/dev-config/.github/workflows/node-check.yml@v1`（Python 用 `python-check.yml`）            |
 | Python                     | 复制 `python/ruff.toml`、`python/Makefile` 到仓库根目录                                                    |
+
+死代码检查在 CI 里默认关闭，仓库的 knip 报告清零后给 `node-check.yml` 传 `unused: true`。
 
 需要仓库特有规则时，在本地配置里展开预设再追加，并注释原因：
 

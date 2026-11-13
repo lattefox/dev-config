@@ -23,6 +23,10 @@ on:
         description: 执行 pnpm test（Tier 1 仓库开启）
         type: boolean
         default: false
+      unused:
+        description: 执行 pnpm lint:unused（knip 报告清零后开启）
+        type: boolean
+        default: false
       build:
         type: boolean
         default: true
@@ -58,6 +62,10 @@ jobs:
 
       - name: Format, lint, type-check
         run: pnpm check
+
+      - name: Unused code
+        if: inputs.unused
+        run: pnpm lint:unused
 
       - name: Test
         if: inputs.test

@@ -6,6 +6,8 @@ const modules = [
   '../eslint/nest.js',
   '../prettier/index.js',
   '../commitlint/index.js',
+  '../knip/react.js',
+  '../knip/nest.js',
 ]
 for (const path of modules) {
   const { default: config } = await import(path)
