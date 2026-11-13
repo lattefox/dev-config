@@ -24,6 +24,11 @@
 - 权限检查写在 handler 里，不依赖前端隐藏按钮。
 - 密钥、数据库连接只在服务端代码中使用，不通过返回值带到客户端。
 
+## 测试
+
+- 单元测试用独立的 `vitest.config.ts`，只配置路径别名，不加载 `vite.config` 里的插件：content-collections 插件在 vitest 环境下会报 `__dirname is not defined`，导致所有测试无法启动。参考：console、ministry 的 `vitest.config.ts`。
+- 纯函数和 hook 的状态规则写单元测试；页面级行为靠构建产物对比和 system-tests，不为页面写快照测试。
+
 ## 容错
 
 - 根路由用 Suspense 包住页面出口，并为路由配置错误组件，局部出错时不至于整站白屏。
