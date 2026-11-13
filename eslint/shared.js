@@ -18,6 +18,7 @@ export const ignores = {
     'eslint.config.*',
     'prettier.config.*',
     'commitlint.config.*',
+    'knip.config.*',
   ],
 }
 
