@@ -22,11 +22,11 @@ export const ignores = {
   ],
 }
 
-// 计划书 6.4 的可读性指标；v1 只告警，各仓库清零后再升为 error
+// 计划书 6.4 的可读性指标；v1 只告警，各仓库清零后 v2 起为 error
 export const readability = {
   rules: {
-    'max-lines': ['warn', { max: 400, skipBlankLines: true, skipComments: true }],
-    'max-lines-per-function': ['warn', { max: 60, skipBlankLines: true, skipComments: true }],
-    complexity: ['warn', 10],
+    'max-lines': ['error', { max: 400, skipBlankLines: true, skipComments: true }],
+    'max-lines-per-function': ['error', { max: 60, skipBlankLines: true, skipComments: true }],
+    complexity: ['error', 10],
   },
 }

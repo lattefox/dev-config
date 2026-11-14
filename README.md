@@ -7,7 +7,7 @@
 ## 安装
 
 ```sh
-pnpm add -D github:lattefox/dev-config#v1.0.5
+pnpm add -D github:lattefox/dev-config#v2.0.0
 ```
 
 ## 使用
@@ -20,7 +20,7 @@ pnpm add -D github:lattefox/dev-config#v1.0.5
 | `tsconfig.json`            | `"extends": "@lattefox/dev-config/tsconfig/react.json"`，本地只写 `paths`、`include`、`exclude` 等相对路径 |
 | `knip.config.js`           | `export { default } from '@lattefox/dev-config/knip/react'`（NestJS 用 `knip/nest`），另需 `knip`          |
 | `.husky/`                  | 复制 `templates/husky/pre-commit`、`commit-msg`                                                            |
-| `.github/workflows/ci.yml` | `uses: lattefox/dev-config/.github/workflows/node-check.yml@v1`（Python 用 `python-check.yml`）            |
+| `.github/workflows/ci.yml` | `uses: lattefox/dev-config/.github/workflows/node-check.yml@v2`（Python 用 `python-check.yml`）            |
 | Python                     | 复制 `python/ruff.toml`、`python/Makefile` 到仓库根目录                                                    |
 
 死代码检查在 CI 里默认关闭，仓库的 knip 报告清零后给 `node-check.yml` 传 `unused: true`。
@@ -63,5 +63,7 @@ export default [...react, { rules: { '@typescript-eslint/no-unnecessary-conditio
 ## 发版
 
 1. 修改后运行 `pnpm check`。
-2. 改 `package.json` 版本号，打 tag `vX.Y.Z`，并移动大版本 tag `v1` 指向它（可复用 workflow 用 `@v1` 引用）。
-3. 各仓库把依赖改为新 tag。可读性规则（`max-lines` 等）当前为 `warn`，所有仓库清零后在下一个大版本升为 `error`。
+2. 改 `package.json` 版本号，打 tag `vX.Y.Z`，并移动大版本 tag（当前 `v2`）指向它（可复用 workflow 用 `@v2` 引用）。
+3. 各仓库把依赖改为新 tag。
+
+v2 起可读性规则（`max-lines` 400、`max-lines-per-function` 60、`complexity` 10）为 `error`；测试文件不检查行数。

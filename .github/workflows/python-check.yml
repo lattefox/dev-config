@@ -2,7 +2,7 @@
 #
 #   jobs:
 #     check:
-#       uses: lattefox/dev-config/.github/workflows/python-check.yml@v1
+#       uses: lattefox/dev-config/.github/workflows/python-check.yml@v2
 name: Python check
 
 on:
