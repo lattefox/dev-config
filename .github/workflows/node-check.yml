@@ -66,16 +66,16 @@ jobs:
         ports:
           - 5432:5432
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Export CI env
         if: inputs.env != ''
         run: printf '%s\n' "${{ inputs.env }}" >> "$GITHUB_ENV"
 
       # 版本取自调用方 package.json 的 packageManager 字段
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ inputs.node-version }}
           cache: pnpm
