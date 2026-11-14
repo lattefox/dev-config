@@ -2,7 +2,7 @@
 #
 #   jobs:
 #     check:
-#       uses: lattefox/dev-config/.github/workflows/node-check.yml@v1
+#       uses: lattefox/dev-config/.github/workflows/node-check.yml@v2
 #       with:
 #         prisma: true
 #         postgres: true          # 启动 Postgres，连接串 postgresql://ci:ci@localhost:5432/ci

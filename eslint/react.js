@@ -26,5 +26,13 @@ export default [
       complexity: 'off',
     },
   },
+  {
+    // 测试文件按用例分组，describe 回调天然较长，与 nest 预设一致只保留复杂度检查
+    files: ['**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}', 'tests/**/*.ts'],
+    rules: {
+      'max-lines': 'off',
+      'max-lines-per-function': 'off',
+    },
+  },
   ignores,
 ]
